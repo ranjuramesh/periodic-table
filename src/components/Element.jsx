@@ -3,27 +3,26 @@ import { categories } from '../data/elements';
 function Element({ element, onClick, isHighlighted, isFiltered, isSearchMatch }) {
   const category = categories[element.category] || categories['unknown'];
   const textColor = category.textColor || '#1a1a2e';
-  
+
+  // All positions shifted +1 on each axis to make room for period/group label cells
   const style = {
-    gridColumn: element.group || 'auto',
-    gridRow: element.period + (element.category === 'lanthanide' ? 2 : element.category === 'actinide' ? 2 : 0),
+    gridColumn: element.group ? element.group + 1 : 'auto',
+    gridRow: element.period + 1,
     backgroundColor: isFiltered ? category.color : (isHighlighted ? category.color : `${category.color}40`),
     opacity: isFiltered ? 1 : (isHighlighted ? 1 : 0.4),
   };
 
-  // Special positioning for lanthanides and actinides
+  // Special positioning for lanthanides and actinides (f-block rows 10 & 11)
   if (element.category === 'lanthanide') {
-    style.gridRow = 9;
-    style.gridColumn = element.atomicNumber - 54;
-  } else if (element.category === 'actinide') {
     style.gridRow = 10;
-    style.gridColumn = element.atomicNumber - 86;
+    style.gridColumn = element.atomicNumber - 53; // was -54, +1 for label column
+  } else if (element.category === 'actinide') {
+    style.gridRow = 11;
+    style.gridColumn = element.atomicNumber - 85; // was -86, +1 for label column
   }
 
-  // Add glow effect for search matches
+  // Search match: rely on CSS class only — no inline transforms
   if (isSearchMatch) {
-    style.boxShadow = `0 0 15px 5px ${category.color}, 0 0 30px 10px ${category.color}80`;
-    style.transform = 'scale(1.1)';
     style.zIndex = 5;
   }
 

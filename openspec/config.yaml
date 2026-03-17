@@ -1,0 +1,42 @@
+schema: spec-driven
+
+context: |
+  Project: Periodic Table — interactive React SPA displaying all 118 chemical elements.
+
+  Tech stack:
+  - React 19 + Vite 7 (no TypeScript)
+  - Plain CSS (no CSS-in-JS, no Tailwind)
+  - No external state library — all state in App.jsx via hooks
+  - No test framework configured
+  - ESLint 9 flat config
+
+  Deployment:
+  - GitHub Pages at /periodic-table/ base path
+  - vite.config.js sets base: '/periodic-table/'
+  - Build output: dist/
+  - CI: .github/workflows/
+
+  Architecture:
+  - App.jsx holds all state: selectedElement, selectedCategory, searchTerm, isFullscreen
+  - Component tree: App > SearchBar, CategoryFilter, PeriodicTable (> Element), ElementModal
+  - Data: src/data/elements.js exports 118 element objects and 11 category definitions (with color/textColor)
+  - Each element has: atomic properties, physical properties, group/period (for CSS Grid positioning), category
+  - Layout: CSS Grid; lanthanides (period 9) and actinides (period 10) are repositioned in PeriodicTable.jsx
+  - Filtering: PeriodicTable.jsx matches search against name, symbol, or atomicNumber; composes with category filter
+  - Fullscreen: browser Fullscreen API (requestFullscreen/exitFullscreen) + Escape key listener
+
+  Conventions:
+  - No TypeScript — stay with plain JS (.jsx)
+  - Variables matching /^[A-Z_]/ may be unused (ESLint rule for component imports/constants)
+  - Dev server on port 3000 (strict — fails if in use): npm run dev
+  - Lint: npm run lint
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours

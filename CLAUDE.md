@@ -37,6 +37,10 @@ App
 
 **Fullscreen:** Uses the browser Fullscreen API (`requestFullscreen`/`exitFullscreen`) with an Escape key listener. In fullscreen, header/footer hide and category filter labels abbreviate.
 
+## Deployment
+
+`vite.config.js` sets `base: '/periodic-table/'`, so all asset paths are rooted there. The app is deployed to GitHub Pages via `.github/workflows/` — `npm run build` output goes to `dist/`. Running `npm run preview` locally also serves under `/periodic-table/`.
+
 ## ESLint
 
 Uses ESLint 9 flat config format. Variables matching `/^[A-Z_]/` may be unused without warning (allows unused component imports and constants).

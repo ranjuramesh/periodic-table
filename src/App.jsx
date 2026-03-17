@@ -40,47 +40,60 @@ function App() {
 
   return (
     <div className={`app ${isFullscreen ? 'fullscreen-mode' : ''}`}>
-      {/* Fullscreen Toggle Button */}
-      <button 
-        className="fullscreen-btn" 
-        onClick={toggleFullscreen}
-        title={isFullscreen ? 'Exit Fullscreen (Esc)' : 'Enter Presentation Mode'}
-      >
-        {isFullscreen ? '✕' : '⛶'}
-      </button>
-
-      {!isFullscreen && (
+      {isFullscreen ? (
+        // Fullscreen / TV mode: topbar with search + toggle
+        <div className="fullscreen-topbar">
+          <SearchBar
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+          />
+          <button
+            className="fullscreen-btn"
+            onClick={toggleFullscreen}
+            title="Exit Fullscreen (Esc)"
+          >
+            ✕
+          </button>
+        </div>
+      ) : (
+        // Standard mode: fixed toggle, header, search
         <>
+          <button
+            className="fullscreen-btn"
+            onClick={toggleFullscreen}
+            title="Enter Presentation Mode"
+          >
+            ⛶
+          </button>
           <header className="app-header">
             <h1>Interactive Periodic Table</h1>
             <p className="subtitle">Click on any element to learn more about it</p>
           </header>
-
-          <SearchBar 
+          <SearchBar
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
           />
         </>
       )}
 
-      <CategoryFilter 
+      <CategoryFilter
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
-        isFullscreen={isFullscreen}
+        mode={isFullscreen ? 'legend' : 'filter'}
       />
 
       <main className={`main-content ${isFullscreen ? 'fullscreen-content' : ''}`}>
-        <PeriodicTable 
+        <PeriodicTable
           onElementClick={handleElementClick}
           selectedCategory={selectedCategory}
           searchTerm={searchTerm}
-          isFullscreen={isFullscreen}
         />
       </main>
 
-      <ElementModal 
+      <ElementModal
         element={selectedElement}
         onClose={handleCloseModal}
+        mode={isFullscreen ? 'panel' : 'modal'}
       />
 
       {!isFullscreen && (

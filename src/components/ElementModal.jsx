@@ -1,26 +1,29 @@
 import { categories } from '../data/elements';
 
-function ElementModal({ element, onClose }) {
+function ElementModal({ element, onClose, mode = 'modal' }) {
   if (!element) return null;
 
   const category = categories[element.category] || categories['unknown'];
+  const isPanel = mode === 'panel';
 
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div 
-        className="modal-content" 
-        onClick={(e) => e.stopPropagation()}
-        style={{ borderColor: category.color }}
-      >
-        <button className="modal-close" onClick={onClose}>×</button>
-        
-        <div className="modal-header" style={{ backgroundColor: category.color }}>
-          <span className="modal-atomic-number">{element.atomicNumber}</span>
-          <span className="modal-symbol">{element.symbol}</span>
-          <span className="modal-name">{element.name}</span>
-        </div>
+  const content = (
+    <div
+      className={isPanel ? 'detail-panel' : 'modal-content'}
+      onClick={(e) => e.stopPropagation()}
+      style={isPanel
+        ? { borderLeftColor: category.color }
+        : { borderColor: category.color }
+      }
+    >
+      <button className="modal-close" onClick={onClose}>×</button>
 
-        <div className="modal-body">
+      <div className="modal-header" style={{ backgroundColor: category.color }}>
+        <span className="modal-atomic-number">{element.atomicNumber}</span>
+        <span className="modal-symbol">{element.symbol}</span>
+        <span className="modal-name">{element.name}</span>
+      </div>
+
+      <div className="modal-body">
           <p className="element-description">{element.description}</p>
           
           <div className="element-properties">
@@ -70,7 +73,16 @@ function ElementModal({ element, onClose }) {
             </div>
           </div>
         </div>
-      </div>
+    </div>
+  );
+
+  if (isPanel) {
+    return content;
+  }
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      {content}
     </div>
   );
 }
