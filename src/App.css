@@ -110,7 +110,7 @@
 }
 
 .fullscreen-content .periodic-table {
-  width: min(96vw, calc((100vh - 140px) * 1.727));
+  width: min(98vw, calc((100vh - 90px) * 1.727));
   max-width: none;
   gap: 3px;
 }
@@ -312,7 +312,7 @@
   gap: 3px;
   padding: 8px;
   width: min(92vw, calc((100vh - 280px) * 1.727));
-  max-width: 1600px;
+  max-width: none;
   margin: 0 auto;
   aspect-ratio: 19 / 11;
 }
@@ -589,6 +589,31 @@
 
   .detail-panel {
     width: 400px;
+  }
+}
+
+/* Ultrawide monitors (>2:1 aspect ratio, e.g. 21:9, 32:9) */
+@media (min-width: 1920px) and (min-aspect-ratio: 2/1) {
+  /* Compact header rows to maximise table height */
+  .app-header {
+    padding: 4px 0 6px;
+  }
+
+  .search-container {
+    padding: 3px 20px 5px;
+  }
+
+  .category-filter {
+    padding: 3px 12px 5px;
+  }
+
+  /* Updated width formula with reduced overhead */
+  .periodic-table {
+    width: min(94vw, calc((100vh - 220px) * 1.727));
+  }
+
+  .fullscreen-content .periodic-table {
+    width: min(98vw, calc((100vh - 80px) * 1.727));
   }
 }
 
