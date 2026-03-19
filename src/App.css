@@ -771,10 +771,19 @@
   }
 }
 
-/* Medium — hide atomic mass */
+/* Medium (iPad landscape and smaller) — hide name + atomic mass */
 @media (max-width: 1200px) {
   .element .atomic-mass {
     display: none;
+  }
+
+  .element .name {
+    display: none;
+  }
+
+  /* Symbol can be slightly smaller so it breathes in the cell */
+  .element .symbol {
+    font-size: clamp(0.9rem, 2.2vw, 1.35rem);
   }
 }
 
@@ -807,13 +816,6 @@
     font-size: 0.62rem;
   }
 
-  .element .name {
-    display: none;
-  }
-
-  .element .atomic-mass {
-    display: none;
-  }
 }
 
 /* Mobile */
