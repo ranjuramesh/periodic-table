@@ -725,16 +725,19 @@
 
   /* On ultrawide, drop the aspect-ratio constraint and fill both axes
      so cells expand to use the extra horizontal space rather than
-     leaving large empty margins. */
+     leaving large empty margins.
+     Use height: 100% (not calc) so the table fills its flex container
+     exactly — the flexbox distributes space correctly accounting for
+     header, footer, etc. */
   .periodic-table {
     width: 96vw;
-    height: calc(100vh - 160px);
+    height: 100%;
     aspect-ratio: unset;
   }
 
   .fullscreen-content .periodic-table {
     width: 99vw;
-    height: calc(100vh - 60px);
+    height: 100%;
     aspect-ratio: unset;
   }
 }
