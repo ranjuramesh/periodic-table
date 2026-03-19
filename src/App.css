@@ -818,19 +818,86 @@
 
 }
 
-/* Mobile */
+/* Mobile — horizontal-scroll layout */
 @media (max-width: 768px) {
+  /* Tighten overall padding */
+  .app {
+    padding: 8px 10px 4px;
+  }
+
+  .app-header {
+    padding: 2px 0 4px;
+  }
+
   .app-header h1 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
   }
 
   .subtitle {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
+  }
+
+  .search-container {
+    padding: 3px 0 5px;
+    max-width: 100%;
+  }
+
+  /* Single horizontally scrollable row — no wrapping */
+  .category-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 3px 0 5px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  .category-filter::-webkit-scrollbar {
+    display: none;
   }
 
   .filter-btn {
-    padding: 4px 7px;
-    font-size: 0.58rem;
+    padding: 4px 8px;
+    font-size: 0.6rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Keep heatmap legend compact in the scrollable row */
+  .heatmap-legend {
+    min-width: 120px;
+  }
+
+  /* Table area scrolls horizontally */
+  .main-content {
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 2px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .periodic-table-container {
+    width: auto;
+    height: auto;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-shrink: 0;
+  }
+
+  /* Fixed width so cells are ~30px — readable with just symbol shown */
+  .periodic-table {
+    width: 700px;
+    aspect-ratio: 19 / 11;
+    gap: 2px;
+    padding: 4px;
+    margin: 0;
+  }
+
+  .app-footer {
+    padding: 6px 0;
+    font-size: 0.72rem;
   }
 
   .element-properties {
@@ -838,12 +905,12 @@
   }
 
   .fullscreen-btn {
-    width: 32px;
-    min-width: 32px;
-    max-width: 32px;
-    height: 32px;
-    min-height: 32px;
-    max-height: 32px;
-    font-size: 0.9rem;
+    width: 30px;
+    min-width: 30px;
+    max-width: 30px;
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    font-size: 0.85rem;
   }
 }
