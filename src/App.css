@@ -723,13 +723,16 @@
     padding: 3px 12px 5px;
   }
 
-  /* Updated width formula with reduced overhead */
+  /* On ultrawide, clamp both by vw and by height so the table
+     fills as much horizontal space as possible while still fitting
+     vertically.  The 160px overhead is tighter than the generic
+     220px value because the header rows are compacted above. */
   .periodic-table {
-    width: min(94vw, calc((100vh - 220px) * 1.727));
+    width: min(96vw, calc((100vh - 160px) * 1.727));
   }
 
   .fullscreen-content .periodic-table {
-    width: min(98vw, calc((100vh - 80px) * 1.727));
+    width: min(99vw, calc((100vh - 60px) * 1.727));
   }
 }
 
