@@ -1,7 +1,7 @@
 import Element from './Element';
 import { elements, categories } from '../data/elements';
 
-function PeriodicTable({ onElementClick, selectedCategory, searchTerm }) {
+function PeriodicTable({ onElementClick, selectedCategory, searchTerm, heatmapProperty, isModalOpen }) {
   // Check if an element matches the search term
   const matchesSearch = (element) => {
     if (!searchTerm) return false;
@@ -78,6 +78,8 @@ function PeriodicTable({ onElementClick, selectedCategory, searchTerm }) {
                   : selectedCategory === null || element.category === selectedCategory
               }
               isSearchMatch={isSearchMatch}
+              heatmapProperty={heatmapProperty}
+              isModalOpen={isModalOpen}
             />
           );
         })}

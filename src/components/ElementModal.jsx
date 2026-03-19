@@ -1,4 +1,5 @@
 import { categories } from '../data/elements';
+import BohrDiagram from './BohrDiagram';
 
 function ElementModal({ element, onClose, mode = 'modal' }) {
   if (!element) return null;
@@ -24,6 +25,7 @@ function ElementModal({ element, onClose, mode = 'modal' }) {
       </div>
 
       <div className="modal-body">
+          <BohrDiagram element={element} />
           <p className="element-description">{element.description}</p>
           
           <div className="element-properties">

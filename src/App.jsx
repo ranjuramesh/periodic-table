@@ -10,6 +10,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [heatmapProperty, setHeatmapProperty] = useState(null);
 
   const handleElementClick = (element) => {
     setSelectedElement(element);
@@ -80,6 +81,8 @@ function App() {
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
         mode={isFullscreen ? 'legend' : 'filter'}
+        heatmapProperty={heatmapProperty}
+        onHeatmapChange={setHeatmapProperty}
       />
 
       <main className={`main-content ${isFullscreen ? 'fullscreen-content' : ''}`}>
@@ -87,6 +90,8 @@ function App() {
           onElementClick={handleElementClick}
           selectedCategory={selectedCategory}
           searchTerm={searchTerm}
+          heatmapProperty={heatmapProperty}
+          isModalOpen={selectedElement !== null}
         />
       </main>
 
